@@ -11,8 +11,14 @@ class Person:
         api_url = f'http://api.weatherapi.com/v1/current.json?key=59702037ba85410da5e214247230407&q={city}&aqi=no'
         response = requests.get(api_url)
         results = response.json()
-        for k,v in results.items():
-            print(k, v)
+        myWeather = {}
+        for k,v in results['location'].items():
+            if k == 'localtime_epoch':
+                continue
+            else:
+                myWeather[f'{k}'] = v
+        print(myWeather)
+            
     
     def SpecificData(self):
         userInput = input('Please type a City: ')
